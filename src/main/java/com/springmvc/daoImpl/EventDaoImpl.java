@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -42,17 +41,20 @@ public class EventDaoImpl implements EventDao{
  	@Override
  	@Transactional
  	public void saveEvent(Event event) {
-
- 		jdbcTemplate.update("INSERT INTO TMSystem.events (event_name, created_by, created_date, updated_by, team_id)"
- 				+ " VALUES (?, ?, ?, ? , ?)", event.getEvent_name(), event.getCreated_by(),event.getCreated_date(), event.getUpdated_by(), event.getTeam_id());
- 		System.out.println("I have reached here");		
+ 		Session session = em.unwrap(Session.class);
+ 		Event eventSample = new Event();
+ 		eventSample.setEvent_name(event.getEvent_name());
+ 		eventSample.setCreated_by(event.getCreated_by());
+ 		eventSample.setUpdated_by(event.getUpdated_by());
+ 		eventSample.setTeam_id(event.getTeam_id());
+ 		session.saveOrUpdate(eventSample);
+ 		session.close();
  	}
  
  	@Override
  	@Transactional
  		public Event getEventDetails(int id) {
-		Criteria crit = sessionFactory.getCurrentSession().createCriteria(Event.class).add(Restrictions.idEq(id));
- 		 return (Event) crit.uniqueResult();
+ 		return (Event) em.unwrap(Session.class).createCriteria(Event.class).add(Restrictions.idEq(id)).uniqueResult();
  	}
  
  	@Override
@@ -65,10 +67,10 @@ public class EventDaoImpl implements EventDao{
  	@Override
  	@Transactional
  	public void deleteEvent(int id) {
-		/** Event event = em.find(Event.class, id); em.remove(event); */
- 		String deleteSql = "delete from TMSystem.events where id = ?";
- 		jdbcTemplate.update(deleteSql, new Object[]{id}); 
- 		
+ 		Session session = em.unwrap(Session.class);
+ 		Event event = em.find(Event.class, id); 
+ 		session.delete(event);
+ 		session.flush();
  	}
 
 }
