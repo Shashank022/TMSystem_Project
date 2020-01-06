@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class EventDaoImpl implements EventDao{
 	@Override
 	@Transactional
  	public List<Event> getallEventsList() {
- 		return sessionFactory.getCurrentSession().createCriteria(Event.class).list();
+		Session session = em.unwrap(Session.class);
+ 		return session.createCriteria(Event.class).list();
  	}
  
  	@Override
