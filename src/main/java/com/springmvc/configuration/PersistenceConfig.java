@@ -49,12 +49,13 @@ public class PersistenceConfig {
 		return sessionBuilder.buildSessionFactory();
 	}
 	
-   @Bean
+	@Autowired
+	@Bean(name = "entityManager")
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean em 
         = new LocalContainerEntityManagerFactoryBean();
       em.setDataSource(dataSource());
-      em.setPackagesToScan(new String[] {"com.springmvc.*"});
+      em.setPackagesToScan(new String[] {"com.springmvc.model"});
 
       JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
       em.setJpaVendorAdapter(vendorAdapter);
