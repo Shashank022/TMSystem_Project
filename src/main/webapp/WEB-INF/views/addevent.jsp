@@ -29,11 +29,6 @@
 		<form:input path="updated_by" type="text" class="form-control" required="required"/>
 		<form:errors path="updated_by" cssClass="text-warning"/> 
 	</fieldset>
-		<fieldset class="form-group">
-		<form:label path="team_id">Team ID:</form:label>
-		<form:input path="team_id" type="number" class="form-control" required="required"/>
-		<form:errors path="team_id" cssClass="text-warning"/> 
-	</fieldset>
 		<input class="btn btn-success" type="submit" value="Submit"/>
 	</form:form>
 </div>

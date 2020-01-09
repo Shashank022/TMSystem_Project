@@ -12,8 +12,8 @@ public class TeamMapper implements RowMapper<Team> {
 		Team team = new Team();
 		team.setId(rs.getInt("team_id"));
 		team.setTeam_name(rs.getString("team_name"));
-		team.setEvent_id(rs.getInt(("event_id")));
-		team.setTask_id(rs.getInt("task_id"));
+		//team.setEvent(rs.
+		//team.setTask_id(rs.getInt("task_id"));
 
 		return team;
 	}

@@ -8,7 +8,8 @@ import javax.persistence.PersistenceContext;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,37 +17,44 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.springmvc.dao.EventDao;
 import com.springmvc.model.Event;
+import com.springmvc.model.Team;
+import com.springmvc.rowmapper.EventMapper;
+import com.springmvc.rowmapper.TeamMapper;
 
 @Repository
 public class EventDaoImpl implements EventDao{
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
 	
+	private Logger  logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 	
 	@PersistenceContext
 	EntityManager em;
 	
-	
-	@SuppressWarnings("unchecked")
+		
 	@Override
 	@Transactional
  	public List<Event> getallEventsList() {
-		Session session = em.unwrap(Session.class);
- 		return session.createCriteria(Event.class).list();
+		//TypedQuery<Event> createNamedQuery = em.createNamedQuery("for_events_list", Event.class); 
+		//jdbcTemplate.query("select * from TMSystem.events", new EventMapper());
+ 		return (List<Event>) jdbcTemplate.query("select * from TMSystem.events", new EventMapper());
  	}
  
  	@Override
  	@Transactional
  	public void saveEvent(Event event) {
- 		Session session = em.unwrap(Session.class);
+ 		Session session = em.unwrap(Session.class);	
  		Event eventSample = new Event();
  		eventSample.setEvent_name(event.getEvent_name());
  		eventSample.setCreated_by(event.getCreated_by());
  		eventSample.setUpdated_by(event.getUpdated_by());
- 		eventSample.setTeam_id(event.getTeam_id());
+ 		//eventSample.setTeam_id(event.getTeam_id());
  		session.saveOrUpdate(eventSample);
  		session.close();
  	}
@@ -54,23 +62,49 @@ public class EventDaoImpl implements EventDao{
  	@Override
  	@Transactional
  		public Event getEventDetails(int id) {
- 		return (Event) em.unwrap(Session.class).createCriteria(Event.class).add(Restrictions.idEq(id)).uniqueResult();
+ 		
+ 		Event event = em.find(Event.class, id);
+ 		event.getTeam();
+ 		return event;
  	}
  
  	@Override
+ 	@Transactional
  	public void updateEvent(Event event) {
- 		String updateSql = "update TMSystem.events set event= ? where id = ?";
- 		jdbcTemplate.update(updateSql, new Object[]{event, event.getId()}); 
- 		
+ 		Session session = em.unwrap(Session.class);
+ 		if(event.getId() != 0) {
+ 	 		session.saveOrUpdate(event); 			
+ 	 		session.flush();
+ 		} 
  	}
  
  	@Override
  	@Transactional
  	public void deleteEvent(int id) {
- 		Session session = em.unwrap(Session.class);
+//		Event event = em.find(Event.class, id); 
+// 		em.remove(event);
+// 		//em.flush();
  		Event event = em.find(Event.class, id); 
+ 		Session session = em.unwrap(Session.class);
  		session.delete(event);
  		session.flush();
  	}
+
+	@SuppressWarnings("unused")
+	@Override
+	@Transactional
+	public List<Team> getTeamDetailsforEvent(int id) {
+ 		//Team event = em.find(Event.class, id); 
+		
+		//logger.info(""{}, );
+		
+//		List<Team> teamsList = em.createQuery("select e from TMSystem.Team e where e.event_id = :id",
+//			    Team.class).setParameter("id", id).getResultList();
+		
+		//List<Team> teamsList = sessionFactory.getCurrentSession().createCriteria(Team.class).list();
+		//.add(Restrictions.eq("event_id", event_id)).list();
+		List<Team> teamList =  jdbcTemplate.query("select * from TMSystem.teams where event_id =? ", new Object[] {id},new TeamMapper()); 
+		return teamList;
+	}
 
 }

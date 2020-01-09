@@ -1,10 +1,14 @@
 package com.springmvc.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,64 +20,59 @@ public class Team {
 	private int id;
 	private String team_name;
 	
-	private int event_id;
-	private int task_id;
+	@ManyToOne(fetch = FetchType.EAGER) 
+	private Event event; 
+	
+	@OneToMany(mappedBy = "team")
+	private List<Task> task = new ArrayList<>();
 	
 	
-	public Team(int id, String team_name, int event_id, int task_id) {
+	public Team() {
+		super();
+	}
+
+	public Team(int id, String team_name, Event event, List<Task> task) {
 		super();
 		this.id = id;
 		this.team_name = team_name;
-		this.event_id = event_id;
-		this.task_id = task_id;
+		this.event = event;
+		this.task = task;
 	}
-
-
-	public Team() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getTeam_name() {
 		return team_name;
 	}
 
-
 	public void setTeam_name(String team_name) {
 		this.team_name = team_name;
 	}
 
+	public Event getEvent() {
+		return event;
+	}
 
-	public int getEvent_id() {
-		return event_id;
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+
+	public List<Task> getTask() {
+		return task;
+	}
+
+	public void setTask(List<Task> task) {
+		this.task = task;
 	}
 
 
-	public void setEvent_id(int event_id) {
-		this.event_id = event_id;
-	}
-
-
-	public int getTask_id() {
-		return task_id;
-	}
-
-
-	public void setTask_id(int task_id) {
-		this.task_id = task_id;
-	}
-
-
+	
+	
 
 }
