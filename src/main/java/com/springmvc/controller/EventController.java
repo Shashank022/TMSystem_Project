@@ -55,9 +55,9 @@ public class EventController {
 	
 	@RequestMapping(value = "/update-event", method=RequestMethod.POST)
 	public String updateExsistingEvent(@Valid Event event, BindingResult result) {
-		if(result.hasErrors()) {
-			return "eventlist";
-		}
+//		if(result.hasErrors()) {
+//			return "redirect:eventlist";
+//		}
 		eventService.updateEvent(event);
 		return "redirect:eventlist";
 	}
@@ -69,5 +69,10 @@ public class EventController {
 		return "redirect:eventlist";
 	}
 	
-	
+	@RequestMapping(value = "/getDetails", method=RequestMethod.GET)
+	public String gotoDetails(@RequestParam int id, ModelMap model) {
+		model.addAttribute("teams", eventService.getTeamDetailsforEvent(id));
+		model.addAttribute("event", eventService.getEventDetails(id));
+		return "eventteamdetails";
+	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.springmvc.dao.EventDao;
 import com.springmvc.model.Event;
+import com.springmvc.model.Team;
 
 @Service
 public class EventService {
@@ -31,5 +32,10 @@ public class EventService {
 	
 	public void deleteEvent(int id) {
 		eventDao.deleteEvent(id);
+	}
+	
+	public List<Team> getTeamDetailsforEvent(int id) {
+		return eventDao.getTeamDetailsforEvent(id);
+		
 	}
 }
