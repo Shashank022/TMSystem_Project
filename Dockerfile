@@ -1,5 +1,9 @@
 FROM tomcat:8.0.51-jre8-alpine
+
+RUN mkdir TMSytem_Project
+
+COPY target/spring*.war /TMSytem_Project/TMSytem_Project.war
+
 EXPOSE 5060
-RUN rm -rf /usr/local/tomcat/webapps/*
-COPY target/*.war /usr/local/tomcat/webapps/TMSytem_Project.war
+
 CMD ["catalina.sh","run"]
