@@ -15,16 +15,7 @@ import com.springmvc.rowmapper.TeamMapper;
 
 @Repository
 @Transactional
-public class TeamDaoImpl implements TeamDao {
-	
-	private Logger  logger = LoggerFactory.getLogger(this.getClass());
-
-	
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	@PersistenceContext
-	EntityManager em;
+public class TeamDaoImpl extends BaseDaoImpl implements TeamDao {
 	
 
 	@Override

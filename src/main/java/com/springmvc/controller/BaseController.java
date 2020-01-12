@@ -1,6 +1,7 @@
 package com.springmvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.springmvc.dao.EventDao;
@@ -13,6 +14,7 @@ import com.springmvc.service.TodoService;
 import com.springmvc.service.UserService;
 
 public class BaseController {
+	
 	
 	@Autowired
 	protected TeamDao teamDao;
@@ -43,5 +45,8 @@ public class BaseController {
 	
 	@Autowired
 	TodoService todoService;
+	
+	@Autowired
+	ApplicationContext appContext;
 
 }
