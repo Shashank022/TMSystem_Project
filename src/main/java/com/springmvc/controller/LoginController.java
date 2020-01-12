@@ -19,15 +19,4 @@ public class LoginController {
 		return "welcome";
 	}
 
-
-	/*
-	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public String
-	 * handleLoginRequest(@RequestParam String name,@RequestParam String
-	 * password,ModelMap model) {
-	 * 
-	 * if(!service.validateUser(name, password)) {
-	 * model.put("errorMessage","Invalid Credentials"); return "login"; }
-	 * model.put("name", name); model.put("password", password); return "welcome"; }
-	 */
-
 }

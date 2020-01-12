@@ -20,6 +20,10 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.springmvc.daoImpl.EventDaoImpl;
+import com.springmvc.daoImpl.TaskDaoImpl;
+import com.springmvc.daoImpl.TeamDaoImpl;
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({"com.springmvc.*","com.springmvc.*.*"})
@@ -88,6 +92,24 @@ public class PersistenceConfig {
 	@Bean
 	public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
 		return new NamedParameterJdbcTemplate(dataSource());
+	}
+	
+	@Autowired
+	@Bean(name = "eventDao")
+	public EventDaoImpl EventDao() {
+		return new EventDaoImpl();
+	}
+	
+	@Autowired
+	@Bean(name = "teamDao")
+	public TeamDaoImpl TeamDao() {
+		return new TeamDaoImpl();
+	}
+	
+	@Autowired
+	@Bean(name = "taskDao")
+	public TaskDaoImpl TaskDao() {
+		return new TaskDaoImpl();
 	}
 	
 }

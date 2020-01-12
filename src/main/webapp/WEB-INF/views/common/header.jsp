@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>${name}</title>
+<title>TM System</title>
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
 	    		rel="stylesheet">
 </head>

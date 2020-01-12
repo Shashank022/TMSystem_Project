@@ -1,16 +1,20 @@
 
 package com.springmvc.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "events")
+//@NamedQuery(name = "for_events_list", query = "Select e from Event e")
 public class Event {
 
 	@Id
@@ -20,22 +24,9 @@ public class Event {
 	private String created_by;
 	private Date created_date;
 	private String updated_by;
-	private int team_id;
 	
-	
-	public Event() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Event(int id, String created_by, Date created_date, String updated_by, int team_id) {
-		super();
-		this.id = id;
-		this.created_by = created_by;
-		this.created_date = created_date;
-		this.updated_by = updated_by;
-		this.team_id = team_id;
-	}
+	@OneToMany(mappedBy = "event")
+	private List<Team> team = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -43,6 +34,14 @@ public class Event {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getEvent_name() {
+		return event_name;
+	}
+
+	public void setEvent_name(String event_name) {
+		this.event_name = event_name;
 	}
 
 	public String getCreated_by() {
@@ -69,20 +68,15 @@ public class Event {
 		this.updated_by = updated_by;
 	}
 
-	public int getTeam_id() {
-		return team_id;
+	public List<Team> getTeam() {
+		return team;
 	}
 
-	public void setTeam_id(int team_id) {
-		this.team_id = team_id;
+	public void setTeam(List<Team> team) {
+		this.team = team;
 	}
+	
 
-	public String getEvent_name() {
-		return event_name;
-	}
-
-	public void setEvent_name(String event_name) {
-		this.event_name = event_name;
-	}
+	
 
 }

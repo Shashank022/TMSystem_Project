@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.stereotype.Service;
+
+import com.springmvc.controller.BaseController;
 import com.springmvc.model.Todo;
 
 @Service
-public class TodoService {
+public class TodoService extends BaseController{
 	private static List<Todo> todos = new ArrayList<Todo>();
 	private static int todoCount = 3;
 

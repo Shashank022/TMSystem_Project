@@ -18,10 +18,10 @@
 				<c:forEach items="${teams}" var="team">
 					<tr>
 						<td>${team.team_name}</td>
-						<td>${team.event_id}</td>
-						<td>${team.task_id}</td>
-						<td><a href="/update-event?id=${team.event_id}" class="btn btn-success">Task List</a></td>
-						<td><a href="/delete-event?id=${team.event_id}" class="btn btn-danger">Delete</a></td>
+						<td>${team.event}</td>
+						<td>${team.task}</td>
+						<td><a href="/update-event?id=${team.event}" class="btn btn-success">Task List</a></td>
+						<td><a href="/delete-event?id=${team.event}" class="btn btn-danger">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

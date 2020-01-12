@@ -20,15 +20,15 @@
 						<td>${task.task_name}</td>
 						<td>${task.task_created}</td>
 						<td>${task.task_updated}</td>
-						<td><a href="/update-event?id=${task.task_id}" class="btn btn-success">Update</a></td>
-						<td><a href="/delete-event?id=${task.task_id}" class="btn btn-danger">Delete</a></td>
+						<td><a href="/updatetask?id=${task.task_id}" class="btn btn-success">Update</a></td>
+						<td><a href="/deletetask?id=${task.task_id}" class="btn btn-danger">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
 	<div>
-	<a class="btn btn-success" href="/addevent">Add</a>
+	<a class="btn btn-success" href="/addtask">Add</a>
 	</div>
 </div>
 

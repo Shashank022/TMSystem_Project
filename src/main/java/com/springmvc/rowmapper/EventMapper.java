@@ -15,7 +15,7 @@ public class EventMapper implements RowMapper<Event> {
 		event.setCreated_by(rs.getString("created_by"));
 		event.setCreated_date(rs.getDate("created_date"));
 		event.setUpdated_by(rs.getString("updated_by"));
-		event.setTeam_id(rs.getInt("team_id"));
+		//event.setTeam_id(rs.getInt("team_id"));
 		return event;
 	}
 }
