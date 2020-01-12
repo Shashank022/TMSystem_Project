@@ -14,11 +14,7 @@ import com.springmvc.model.Task;
 import com.springmvc.service.TaskService;
 
 @Controller
-public class TaskController {
-	
-	
-	@Autowired
-	TaskService taskService;
+public class TaskController extends BaseController{
 	
 
 	@RequestMapping(value = "/tasklist", method = RequestMethod.GET)
