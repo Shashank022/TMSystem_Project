@@ -2,7 +2,6 @@ package com.springmvc.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.model.Task;
-import com.springmvc.service.TaskService;
 
 @Controller
 public class TaskController extends BaseController{
