@@ -43,7 +43,11 @@ public class EventDaoImpl implements EventDao{
  	public List<Event> getallEventsList() {
 		//TypedQuery<Event> createNamedQuery = em.createNamedQuery("for_events_list", Event.class); 
 		//jdbcTemplate.query("select * from TMSystem.events", new EventMapper());
- 		return (List<Event>) jdbcTemplate.query("select * from TMSystem.events", new EventMapper());
+		
+		List<Event> Event = (List<Event>) jdbcTemplate.query("select * from TMSystem.events", new EventMapper());
+		
+		logger.info("Getting all the list of Events : getallEventsList {}", Event);
+ 		return Event;
  	}
  
  	@Override
@@ -90,7 +94,6 @@ public class EventDaoImpl implements EventDao{
  		session.flush();
  	}
 
-	@SuppressWarnings("unused")
 	@Override
 	@Transactional
 	public List<Team> getTeamDetailsforEvent(int id) {
