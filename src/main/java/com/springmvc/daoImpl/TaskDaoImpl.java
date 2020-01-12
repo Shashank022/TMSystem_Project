@@ -3,15 +3,8 @@ package com.springmvc.daoImpl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,20 +15,8 @@ import com.springmvc.rowmapper.TaskMapper;
 
 @Repository
 @Transactional
-public class TaskDaoImpl implements TaskDao {
+public class TaskDaoImpl extends BaseDaoImpl implements TaskDao {
 
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	SessionFactory sessionfactory;
-	
-	@PersistenceContext
-	EntityManager em;
-	
-	@Autowired
-	ApplicationContext appContext;
-	
 	@Override
 	public List<Task> getallUserList() {
 		
@@ -77,6 +58,7 @@ public class TaskDaoImpl implements TaskDao {
 	 		taskSingle.setTask_created(task.getTask_created());
 	 		taskSingle.setTask_updated((task.getTask_updated()));
 	 		TeamDao teamDao = (TeamDao) appContext.getBean("teamDao");
+	 		System.out.println(teamDao);
 	 		//taskSingle.setTeam( teamDao.getTeam());
 	 		//eventSample.setTeam_id(event.getTeam_id());
 	 		session.saveOrUpdate(taskSingle);

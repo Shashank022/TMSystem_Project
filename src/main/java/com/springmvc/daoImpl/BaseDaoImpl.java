@@ -6,6 +6,7 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class BaseDaoImpl {
@@ -18,5 +19,8 @@ public class BaseDaoImpl {
 	
 	@PersistenceContext
 	EntityManager em;
+	
+	@Autowired
+	ApplicationContext appContext;
 
 }
