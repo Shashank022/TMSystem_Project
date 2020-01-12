@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.springmvc.controller.BaseController;
 import com.springmvc.model.Team;
 
 @Service
-public interface TeamService {
+public class TeamService extends BaseController{
 	
-	public List<Team> getListofTeams();
+	public List<Team> getListofTeams(){
+		return teamDao.getListofTeams();
+	}
 
 }

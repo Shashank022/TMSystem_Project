@@ -26,6 +26,7 @@ public class Team {
 	@OneToMany(mappedBy = "team")
 	private List<Task> task = new ArrayList<>();
 	
+	private int task_id;
 	
 	public Team() {
 		super();
@@ -69,6 +70,14 @@ public class Team {
 
 	public void setTask(List<Task> task) {
 		this.task = task;
+	}
+
+	public int getTask_id() {
+		return task_id;
+	}
+
+	public void setTask_id(int task_id) {
+		this.task_id = task_id;
 	}
 
 

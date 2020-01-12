@@ -10,8 +10,10 @@
 			<li><sec:authorize access="hasRole('ADMIN')"><a href="/admin">Admin</a></sec:authorize></li> 
 			<li><a href="/list-todos">Todos</a></li>
 			<li><a href="/eventlist">Events</a></li>
-			<li><a href="/userlist">Users</a></li>
+			<li><a href="/teamlist">Teams</a></li>
 			<li><a href="/tasklist">Tasks</a></li>
+			<li><a href="/userlist">Users</a></li>
+			
 
 		</ul>
 		<ul class="nav navbar-right">

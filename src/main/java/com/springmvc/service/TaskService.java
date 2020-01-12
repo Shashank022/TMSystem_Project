@@ -5,14 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springmvc.controller.BaseController;
 import com.springmvc.dao.TaskDao;
 import com.springmvc.model.Task;
 
 @Service
-public class TaskService {
-
-	@Autowired
-	TaskDao taskDao;
+public class TaskService extends BaseController{
 	
 	public List<Task> getListofTasks() {
 		System.out.println("Well we are here");
