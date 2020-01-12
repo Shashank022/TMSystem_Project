@@ -14,13 +14,23 @@ public class TaskService {
 	@Autowired
 	TaskDao taskDao;
 	
-	/*
-	 * @Autowired TaskJPARepository taskJPARepository;
-	 */
-	
 	public List<Task> getListofTasks() {
 		System.out.println("Well we are here");
 		return taskDao.getListofTasks();
 	}
-
+	
+	public void saveTask(Task task) {
+		System.out.println("Well we are here");
+		taskDao.saveTask(task);
+	}
+	
+	public void updateTask(Task task) {
+		System.out.println("Well we are here");
+		taskDao.updateTask(task);
+	
+	}
+	
+	public Task getTaskbyId(int id) {
+		return taskDao.getTaskbyId(id); 
+	}
 }

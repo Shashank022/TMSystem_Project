@@ -3,17 +3,25 @@ package com.springmvc.daoImpl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springmvc.dao.TaskDao;
+import com.springmvc.dao.TeamDao;
 import com.springmvc.model.Task;
+import com.springmvc.rowmapper.TaskMapper;
 
 @Repository
+@Transactional
 public class TaskDaoImpl implements TaskDao {
 
 	@Autowired
@@ -21,6 +29,12 @@ public class TaskDaoImpl implements TaskDao {
 	
 	@Autowired
 	SessionFactory sessionfactory;
+	
+	@PersistenceContext
+	EntityManager em;
+	
+	@Autowired
+	ApplicationContext appContext;
 	
 	@Override
 	public List<Task> getallUserList() {
@@ -43,6 +57,51 @@ public class TaskDaoImpl implements TaskDao {
 		
 		return tasks;
 	}
+	
+	@Override
+	public Task getTaskbyId(int id) {
+		//Task task = em.find(Task.class,id);
+		String SQL = "SELECT * FROM TMSystem.tasks where task_id=?";
+		Task task = jdbcTemplate.queryForObject(SQL, new  Object[] {id} ,new TaskMapper());
+		return task;
+	}
+
+
+ 	@Override
+ 	@Transactional
+	public void saveTask(Task task) {
+	 		Session session = em.unwrap(Session.class);	
+	 		Task taskSingle = new Task();
+
+	 		taskSingle.setTask_name(task.getTask_name());
+	 		taskSingle.setTask_created(task.getTask_created());
+	 		taskSingle.setTask_updated((task.getTask_updated()));
+	 		TeamDao teamDao = (TeamDao) appContext.getBean("teamDao");
+	 		//taskSingle.setTeam( teamDao.getTeam());
+	 		//eventSample.setTeam_id(event.getTeam_id());
+	 		session.saveOrUpdate(taskSingle);
+	 		session.close();
+	 	}
+ 	
+ 	//updateTask
+ 	
+
+ 	@Override
+ 	@Transactional
+	public void updateTask(Task task) {
+	 		
+ 			Task taskSingle = getTaskbyId(task.getTask_id());
+ 			Session session = em.unwrap(Session.class);	
+	 	
+	 		taskSingle.setTask_name(task.getTask_name());
+	 		taskSingle.setTask_created(task.getTask_created());
+	 		taskSingle.setTask_updated((task.getTask_updated()));
+	 		TeamDao teamDao = (TeamDao) appContext.getBean("teamDao");
+	 		taskSingle.setTeam( teamDao.getTeam(task.getEvent_id()));
+	 		//eventSample.setTeam_id(event.getTeam_id());
+	 		session.saveOrUpdate(taskSingle);
+	 		session.close();
+	 	}
 
 	/*
 	 * @Override public void saveUser(User user) { jdbcTemplate.
