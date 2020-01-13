@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,10 +24,13 @@ public class Task {
 	private String task_name;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "team_id")
 	private Team team; 
 
 	private Date task_created;
 	private String task_updated;
+	
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity = Event.class)
 	private int event_id;
 	
 	

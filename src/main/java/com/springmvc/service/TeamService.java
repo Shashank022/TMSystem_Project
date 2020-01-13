@@ -14,4 +14,8 @@ public class TeamService extends BaseController{
 		return teamDao.getListofTeams();
 	}
 
+	public Team getDetailsofTeam(int id) {
+		return teamDao.getDetailsofTeam(id);
+	}
+
 }

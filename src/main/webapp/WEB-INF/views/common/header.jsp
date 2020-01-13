@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <head>
 <title>TM System</title>
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"

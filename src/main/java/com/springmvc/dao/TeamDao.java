@@ -8,5 +8,6 @@ public interface TeamDao {
 
 	public Team getTeam(int event_id);
 	public List<Team> getListofTeams();
+	public Team getDetailsofTeam(int id);
 
 }

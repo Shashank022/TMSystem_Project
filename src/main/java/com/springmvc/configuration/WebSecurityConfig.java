@@ -33,5 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/", "/*todo*/**","/*event*/**","/*user*/**").access("hasRole('USER')")
 		.and().exceptionHandling().accessDeniedPage("/accessDenied")
 		.and().formLogin();
+		//.loginPage("/login").permitAll();
 	}
 }	

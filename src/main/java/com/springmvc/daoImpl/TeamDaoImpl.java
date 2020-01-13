@@ -26,4 +26,11 @@ public class TeamDaoImpl extends BaseDaoImpl implements TeamDao {
  		return teams;
 	}
 
+	@Override
+	public Team getDetailsofTeam(int id) {
+		
+		Team team = em.find(Team.class, id);
+		return team;
+	}
+
 }
