@@ -1,29 +1,25 @@
 pipeline {
-  
-  agent any
-  
- stages {
+    agent any
+    tools {
+        maven 'maven-3.6.2'
+        jdk 'open-jdk8'
+    }
+    stages {
+        stage('Check out git repo') {
+            steps {
+               git 'https://github.com/Shashank022/TMSystem_Project.git'
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Building..'
-                sh "chmod +x './prework.sh'"
-                sh "./prework.sh"
-                // sh "sudo docker build -t vuejsproj:latest npm install"
+               sh 'mvn clean install'
             }
         }
 
-          stage('Test') {
+         stage('Deploy to production') {
             steps {
-                echo 'Building anotherJob and getting the log'
+                sh 'scp ./target/TMSsytem_Project.jar'
             }
-          }
-       
-        stage('Deploy'){
-             steps {
-                 echo "This is log"
-             }
-
         }
     }
-    
 }
