@@ -5,7 +5,7 @@ pipeline {
         jdk 'open-jdk8'
     }
     stages {
-        stage('Check out git repo') {
+        stage('Check out Git Repository') {
             steps {
                git 'https://github.com/Shashank022/TMSystem_Project.git'
             }
