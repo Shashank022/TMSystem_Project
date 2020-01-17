@@ -14,5 +14,6 @@ public interface EventDao {
 	public void updateEvent(Event event);
 	public void deleteEvent(int id);
 	public List<Team> getTeamDetailsforEvent(int id);
+	public int getEventStatsData();
 	
 }

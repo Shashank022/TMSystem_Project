@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.springmvc.model.Event;
 import com.springmvc.service.EventService;
 	
-	@Component
+@Component
 @Controller
 public class EventController {
 
@@ -81,4 +81,13 @@ public class EventController {
 		model.addAttribute("event", eventService.getEventDetails(id));
 		return "eventteamdetails";
 	}
+	
+	///
+	
+	@RequestMapping(value = "/eventstats", method=RequestMethod.GET)
+	public String eventStats(ModelMap model) {
+		model.addAttribute("eventstat", eventService.getEventStatsData());
+		return "admin";
+	}
+	
 }

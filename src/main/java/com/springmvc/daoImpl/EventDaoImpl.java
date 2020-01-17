@@ -110,4 +110,10 @@ public class EventDaoImpl implements EventDao{
 		return teamList;
 	}
 
+	@Override
+	public int getEventStatsData() {
+	    int count = jdbcTemplate.queryForObject("select count(*) from TMSystem.events", Integer.class);
+		return count;
+	}
+
 }

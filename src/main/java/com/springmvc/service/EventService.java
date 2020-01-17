@@ -37,4 +37,8 @@ public class EventService extends BaseController{
 		return eventDao.getTeamDetailsforEvent(id);
 		
 	}
+
+	public int getEventStatsData() {
+		return eventDao.getEventStatsData();
+	}
 }
