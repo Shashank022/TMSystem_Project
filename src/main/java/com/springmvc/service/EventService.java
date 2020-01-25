@@ -41,4 +41,8 @@ public class EventService extends BaseController{
 	public int getEventStatsData() {
 		return eventDao.getEventStatsData();
 	}
+
+	public List getListofData() {
+		return eventDao.getListofData();
+	}
 }

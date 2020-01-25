@@ -2,6 +2,7 @@ package com.springmvc.dao;
 
 import java.util.List;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.springmvc.model.Event;
 import com.springmvc.model.Team;
 
@@ -15,5 +16,6 @@ public interface EventDao {
 	public void deleteEvent(int id);
 	public List<Team> getTeamDetailsforEvent(int id);
 	public int getEventStatsData();
+	public List<Data> getListofData();
 	
 }

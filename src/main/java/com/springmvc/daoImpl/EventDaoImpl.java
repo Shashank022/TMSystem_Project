@@ -11,10 +11,12 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.springmvc.dao.EventDao;
 import com.springmvc.model.Event;
 import com.springmvc.model.Team;
@@ -114,6 +116,12 @@ public class EventDaoImpl implements EventDao{
 	public int getEventStatsData() {
 	    int count = jdbcTemplate.queryForObject("select count(*) from TMSystem.events", Integer.class);
 		return count;
+	}
+
+	@Override
+	public List<Data> getListofData() {
+		List<Data> dataList = jdbcTemplate.query("select * from TMSystem.MOCK_DATA", new BeanPropertyRowMapper<Data>(Data.class));
+		return dataList;
 	}
 
 }
